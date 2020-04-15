@@ -1,0 +1,33 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/All"
+
+            android:title="@string/all" />
+        <item
+            android:id="@+id/Tevnoc"
+
+            android:title="@string/tevnoc" />
+        <item
+            android:id="@+id/Vznoc"
+
+            android:title="@string/vznoc" />
+        <item
+            android:id="@+id/Matani"
+
+            android:title="@string/matani" />
+        <item
+            android:id="@+id/Akanjox"
+
+            android:title="@string/akanjox" />
+        <item
+            android:id="@+id/Kulon"
+
+            android:title="@string/kulon" />
+    </group>
+
+
+</menu>

@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Catalog</string>
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="all">All</string>
+    <string name="tevnoc">1</string>
+    <string name="vznoc">2</string>
+    <string name="matani">3</string>
+    <string name="akanjox">4</string>
+    <string name="kulon">5</string>
+    <string name="name">Name</string>
+    <string name="probel"> </string>
+    <string name="textview">TextView</string>
+    <string name="description">description</string>
+    <string name="cost">cost</string>
+    <string name="img1">img1(Main)</string>
+    <string name="img2">img2</string>
+    <string name="img3">img3</string>
+    <string name="set">Set</string>
+    <string name="save">save</string>
+    <string name="delete">Delete</string>
+    <string name="id">id</string>
+    <string name="meta">meta</string>
+    <string name="long_text">TextView long long long text</string>
+    <string name="inchvor_gin">400 drm</string>
+    <string name="add">add</string>
+    <string name="title">Catalog</string>
+</resources>
