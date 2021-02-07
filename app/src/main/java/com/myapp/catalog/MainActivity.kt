@@ -18,7 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
-
+import com.google.firebase.auth.FirebaseAuth
 
 
 class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener{
@@ -34,6 +34,9 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         //lateinit var myDataset:Products
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val list = arrayListOf<String>("hello","pello","ello")
+        val product = Product("Sero","cragravorox","1000$","it",list)
+        Work.addInFBase(product)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
@@ -45,11 +48,19 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_dehaze_black_24dp)
         permission()
         //if(permission) {
+        val user = FirebaseAuth.getInstance().currentUser
+        if(user!=null){
+            Toast.makeText(this,"not null",Toast.LENGTH_SHORT);
             val fragmentManager = this.supportFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction();
             val fragment = CategoryFragment(getString(R.string.all))
             fragmentTransaction.add(R.id.frame_view, fragment)
             fragmentTransaction.commit()
+        }
+        else{
+            val intent = Intent(this, RegActivity::class.java)
+            startActivity(intent)
+        }
        // }
 
 
@@ -57,11 +68,19 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
 
     override fun onResume() {
         super.onResume()
-        val fragmentManager = this.supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction();
-        val fragment = CategoryFragment(getString(R.string.all))
-        fragmentTransaction.replace(R.id.frame_view, fragment)
-        fragmentTransaction.commit()
+
+        val user = FirebaseAuth.getInstance().currentUser
+        if(user!=null){
+            Toast.makeText(this,"not null",Toast.LENGTH_SHORT);
+            val fragmentManager = this.supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction();
+            val fragment = CategoryFragment(getString(R.string.all))
+            fragmentTransaction.add(R.id.frame_view, fragment)
+            fragmentTransaction.commit()
+        }
+        else{
+            finish()
+        }
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "226728323616",
+    "project_id": "kursain-7fb75",
+    "storage_bucket": "kursain-7fb75.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:226728323616:android:1d451a54fbc33fc8c52a45",
+        "android_client_info": {
+          "package_name": "com.myapp.catalog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "226728323616-okai32e8fp8kq98osap10mvkhsh6v2f5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSnlCgTSEztUS6EiE6aM-23ARNadlOeYI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "226728323616-okai32e8fp8kq98osap10mvkhsh6v2f5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

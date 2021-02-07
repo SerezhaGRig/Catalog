@@ -61,7 +61,7 @@ class Adding : AppCompatActivity(), View.OnClickListener {
                 product.description = description.text.toString()
 
                     product.category = category.text.toString()
-
+                Work.addInFBase(product)
                 val db = ProductsDatabase(this)
                     db.insertProduct(product)
                    // val parentLayout = findViewById<View>(android.R.id.content);
