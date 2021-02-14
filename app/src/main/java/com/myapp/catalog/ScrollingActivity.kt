@@ -43,6 +43,19 @@ class ScrollingActivity : AppCompatActivity() {
         viewPager.layoutParams = params
         val db = ProductsDatabase(this)
         val cate =intent.getStringExtra("category")
+        /*myWorkDataset = db.selectProduct(cate)
+        //myWorkDataset.load()
+        //Log.d("station","stex hasav")
+        val inx = intent.getIntExtra("index",0)
+        id.text = "id="+myWorkDataset.prList[inx].id
+        cost.text = myWorkDataset.prList[inx].cost
+        name.text = myWorkDataset.prList[inx].name
+        desc.text = myWorkDataset.prList[inx].description
+        if(myWorkDataset.prList[inx].description.equals(""))
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                desc.background = null
+            }
+        viewPager.adapter = CustomPagerAdapter(this,myWorkDataset,inx)*/
         myDataset = db.selectProduct(cate)
         //myDataset.load()
         //Log.d("station","stex hasav")

@@ -34,9 +34,9 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         //lateinit var myDataset:Products
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val list = arrayListOf<String>("hello","pello","ello")
-        val product = Product("Sero","cragravorox","1000$","it",list)
-        Work.addInFBase(product)
+        //val list = arrayListOf<String>("hello","pello","ello")
+        //val product = Product("Sero","cragravorox","1000$","it",list)
+        //Work.addInFBase(product)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT

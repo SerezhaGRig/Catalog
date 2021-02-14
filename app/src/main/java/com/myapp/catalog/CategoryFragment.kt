@@ -39,7 +39,12 @@ class CategoryFragment(val category:String) : Fragment() {
                 Toast.makeText(context, "Empty page add product", Toast.LENGTH_SHORT).show()
         }
         val viewAdapter = myDataset?.let { activity?.let { it1 -> MyAdapter(it, it1,category) } }
-
+        /*val myWorkDataset = selectWorkProduct(category)
+        myWorkDataset?.let {
+            if (it.prList.size == 0)
+                Toast.makeText(context, "Empty page add product", Toast.LENGTH_SHORT).show()
+        }
+        val viewAdapter = myWorkDataset?.let { activity?.let { it1 -> MyWorkAdapter(it, it1,category) } }*/
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.rec_view).apply {
             // use this setting to improve performance if you know that changes

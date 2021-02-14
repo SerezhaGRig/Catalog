@@ -10,6 +10,8 @@ import android.graphics.Matrix
 import android.net.Uri
 import android.os.Handler
 import android.widget.ImageView
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 
 import java.io.InputStream
 
@@ -164,6 +166,61 @@ class Product
             context: Context
         ) {
             //val thread =
+            /*val storageRef= FirebaseStorage.getInstance().reference
+            path?.let{
+                storageRef.child(path).getBytes(1000*1000).addOnCompleteListener { it1 ->
+                    it1.result?.let {
+                        var fbitmap = BitmapFactory.decodeByteArray(it, 0, it.size)
+                        Thread(
+                            Runnable {
+                                try {
+
+                                    var bmp = Bitmap.createBitmap(reqWidth, reqHeight, Bitmap.Config.ARGB_8888);
+                                    ByteBuffer buffer = ByteBuffer.wrap(it);
+                                    bmp.copyPixelsFromBuffer(buffer);
+
+                                        val mainHandler = Handler(context.mainLooper)
+
+                                        val myRun = Runnable {
+
+                                            if (bmp != null)
+                                                view.setImageBitmap(bmp)
+                                            else
+                                                view.setImageDrawable(null)
+
+                                        }
+                                        mainHandler.post(myRun)
+                                        //carImage.setImageBitmap(bitmap)
+                                        // view.setImageBitmap(bitmap)
+                                    }
+                                }catch(e:Exception){
+                                    e.stackTrace
+                                }
+                                finally {
+                                    view.setImageDrawable(null)
+                                }
+
+                            }).run()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    }
+                }
+            }*/
              Thread(
                 Runnable {
                     try {
@@ -207,7 +264,7 @@ class Product
         }
     }
 }
-class Products(val context: Context)
+class Products()//val context: Context)
 {
     val prList = ArrayList<Product>()
     /*fun load()
