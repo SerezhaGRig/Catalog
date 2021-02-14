@@ -25,7 +25,10 @@ data class Work(val name: String? = null, val description: String? = null,
                 , putImage(product.image1),putImage(product.image2),putImage(product.image3))
             val database = Firebase.database.reference
             val workRef = database.child("works")
-            workRef.setValue(work)
+            val key = database.child("works").push().key
+            if (key != null) {
+                workRef.child(key).setValue(work)
+            }
         }
         private fun putImage(image1: String?):String{
             val storageRef=FirebaseStorage.getInstance().reference
@@ -49,8 +52,8 @@ data class Work(val name: String? = null, val description: String? = null,
             }
             val works = filtered.addOnSuccessListener { it1 ->
                 it1?.let { it ->
-                    //it.children.forEach { item ->
-                        val res=it.getValue(Work::class.java)
+                    it.children.forEach{ item ->
+                        val res=item.getValue(Work::class.java)
                         if (res!=null) {
                             val pr = Product(
                                 res.name.toString(),
@@ -64,13 +67,13 @@ data class Work(val name: String? = null, val description: String? = null,
                                     res.image3.toString()
                                 )
                             )
-                            pr.id = it.key
+                            pr.id = item.key
                             products.prList.add(pr)
                             val viewAdapter = category?.let { activity?.let { it1 -> MyAdapter(products, it1,category) } }
                             recyclerView.adapter=viewAdapter
                             viewAdapter?.notifyDataSetChanged()
                         }
-                  //  }
+                    }
 
 
                 }
@@ -80,7 +83,9 @@ data class Work(val name: String? = null, val description: String? = null,
             }
             return products
         }
-
+        fun delete(id:String){
+            Firebase.database.reference.child("works").child(id).removeValue()
+        }
         fun selectWorks(category: String?, pagerView: ViewPager?, activity: ScrollingActivity, inx:Int): Products {
             val products=Products()
 
@@ -91,8 +96,8 @@ data class Work(val name: String? = null, val description: String? = null,
             }
             val works = filtered.addOnSuccessListener { it1 ->
                 it1?.let { it ->
-                    //it.children.forEach { item ->
-                    val res=it.getValue(Work::class.java)
+                    it.children.forEach { item ->
+                    val res=item.getValue(Work::class.java)
                     if (res!=null) {
                         val pr = Product(
                             res.name.toString(),
@@ -106,7 +111,7 @@ data class Work(val name: String? = null, val description: String? = null,
                                 res.image3.toString()
                             )
                         )
-                        pr.id = it.key
+                        pr.id = item.key
                         products.prList.add(pr)
                         val viewPager = activity.findViewById<ViewPager>(R.id.viewPager)
                         val cost = activity.findViewById<TextView>(R.id.prCost)
@@ -129,7 +134,7 @@ data class Work(val name: String? = null, val description: String? = null,
                         }
 
                     }
-                    //  }
+                      }
 
 
                 }
