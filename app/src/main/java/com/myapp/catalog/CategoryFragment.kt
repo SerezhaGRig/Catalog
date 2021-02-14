@@ -32,13 +32,13 @@ class CategoryFragment(val category:String) : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val viewManager = GridLayoutManager(activity,2) as RecyclerView.LayoutManager
         val db = activity?.let { ProductsDatabase(it) }
-
-        val myDataset = db?.selectProduct(category)
-        myDataset?.let {
+        val recyclerView = view.findViewById<RecyclerView>(R.id.rec_view)
+        val myDataset = Work.selectWorks(category,recyclerView,activity)//db?.selectProduct(category)
+        myDataset.let {
             if (it.prList.size == 0)
                 Toast.makeText(context, "Empty page add product", Toast.LENGTH_SHORT).show()
         }
-        val viewAdapter = myDataset?.let { activity?.let { it1 -> MyAdapter(it, it1,category) } }
+        val viewAdapter = myDataset.let { activity?.let { it1 -> MyAdapter(it, it1,category) } }
         /*val myWorkDataset = selectWorkProduct(category)
         myWorkDataset?.let {
             if (it.prList.size == 0)
@@ -46,7 +46,7 @@ class CategoryFragment(val category:String) : Fragment() {
         }
         val viewAdapter = myWorkDataset?.let { activity?.let { it1 -> MyWorkAdapter(it, it1,category) } }*/
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.rec_view).apply {
+        recyclerView.apply {
             // use this setting to improve performance if you know that changes
             // in content do not change the layout size of the RecyclerView
             setHasFixedSize(true)
