@@ -10,25 +10,31 @@ import android.graphics.Matrix
 import android.net.Uri
 import android.os.Handler
 import android.widget.ImageView
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 
 import java.io.InputStream
+import java.nio.ByteBuffer
 
 
-
-class Product
-{
+class Product {
     var id: String? = null
-    var name:String? =null
-    var image1: String? =null
-    var image2: String? =null
-    var image3: String? =null
-    var category: String? =null
+    var name: String? = null
+    var image1: String? = null
+    var image2: String? = null
+    var image3: String? = null
+    var category: String? = null
     lateinit var description: String
-    lateinit var cost:String
+    lateinit var cost: String
 
     constructor()
-    constructor(name_a:String,description_a: String,cost_a:String,category_a:String,images:ArrayList<String>)
-    {
+    constructor(
+        name_a: String,
+        description_a: String,
+        cost_a: String,
+        category_a: String,
+        images: ArrayList<String>
+    ) {
         name = name_a
         cost = cost_a
         description = description_a
@@ -38,6 +44,7 @@ class Product
         category = category_a
 
     }
+
     companion object {
         /*fun bitmapRes(srcBmp:Bitmap):Bitmap
         {
@@ -105,7 +112,7 @@ class Product
         ): Bitmap? {
             var stream: InputStream? = context.contentResolver.openInputStream(uri)
             // First decode with inJustDecodeBounds=true to check dimensions
-            var bitmap:Bitmap?=null
+            var bitmap: Bitmap? = null
             stream?.let {
                 val options = BitmapFactory.Options()
 
@@ -142,6 +149,7 @@ class Product
             return bitmap
             //return BitmapFactory.decodeResource(res, resId, options)
         }
+
         /*private fun getFilePath(uri: Uri,context: Context): String? {
             val projection = arrayOf(MediaStore.Images.Media.DATA)
 
@@ -163,8 +171,40 @@ class Product
             reqWidth: Int,
             context: Context
         ) {
-            //val thread =
-             Thread(
+            val storageRef = FirebaseStorage.getInstance().reference
+            path?.let {
+                storageRef.child(path).getBytes(4056*4056).addOnCompleteListener {
+                    val doIt = Thread {
+                        val bytes = it.result
+                        if (bytes != null) {
+                            val bmp2 = BitmapFactory.decodeByteArray(bytes, 0, bytes.size);
+                            val bmp=Bitmap.createScaledBitmap(bmp2, reqWidth, reqHeight, false)
+
+                            val mainHandler = Handler(context.mainLooper)
+                            //view.setImageBitmap(bmp)
+                            val myRun = Runnable {
+
+                                if (bmp != null)
+                                    view.setImageBitmap(bmp)
+                                else
+                                    view.setImageDrawable(null)
+
+                            }
+                            mainHandler.post(myRun)
+                            //carImage.setImageBitmap(bitmap)
+                            // view.setImageBitmap(bitmap)
+
+                        } else {
+                            view.setImageDrawable(null)
+                        }
+                    }
+                    doIt.run()
+                }
+
+
+            }
+        }
+        /* Thread(
                 Runnable {
                     try {
                         if (!path.equals("NULL") && !path.equals("") && path != null) {
@@ -202,12 +242,10 @@ class Product
                         view.setImageDrawable(null)
                     }
 
-                }).run()
-
-        }
+                }).run()*/
     }
 }
-class Products(val context: Context)
+class Products()//val context: Context)
 {
     val prList = ArrayList<Product>()
     /*fun load()

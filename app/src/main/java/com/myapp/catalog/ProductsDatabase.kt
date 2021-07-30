@@ -68,7 +68,7 @@ class ProductsDatabase(val context: Context) : SQLiteOpenHelper(context, DATABAS
      fun selectProduct(filter:String?):Products
     {
         //var fil:String
-        val products = Products(context)
+        val products = Products()
         val db = this.readableDatabase
         //if (filter == null)
          //   fil = "All"

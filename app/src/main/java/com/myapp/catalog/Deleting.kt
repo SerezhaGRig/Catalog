@@ -20,8 +20,9 @@ class Deleting : AppCompatActivity(),View.OnClickListener {
 
     override fun onClick(v: View?) {
         val id = findViewById<TextView>(R.id.del_id)
-        val db = ProductsDatabase(this)
-        db.deleteProduct(id.text.toString())
+        //val db = ProductsDatabase(this)
+        //db.deleteProduct(id.text.toString())
+        Work.delete(id.text.toString())
     }
 
 }
